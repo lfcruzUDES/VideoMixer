@@ -1,0 +1,12 @@
+# Output file name, without extension.
+output_name: null
+logo: null
+intro: null
+cut: null
+end: null
+# If there is not a list, VideoMixer assums
+# that all videos must be processed, and
+# uses only intro and end streams if exists.
+# Mixer follows the same stream sequence
+# in the files list.
+files: null
