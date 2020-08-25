@@ -25,17 +25,25 @@ class Menu(object):
         logo()
         print((
             "\nOptions:\n"
-            "\t-conf\tCreates doc conf.\n"
+            "\t-conf\tCreates doc conf.\n\t\t-f force to recreate file.\n"
             "\t-std\tStandardizes videos (HD1080).\n"
         ))
 
     def conf(self, args):
+        """ Creates a conf file. """
         try:
-            self.mixer.create_doc_conf(args[2])
+            print(args)
+            force = False
+            target_path = args[2]
+            if args[2] == "-f":
+                force = True
+                target_path = args[3]
+            self.mixer.create_doc_conf(target_path, force)
         except IndexError:
             self.mixer.create_doc_conf()
 
     def std(self, args):
+        """ Standardizes videos. """
         conf = None
         try:
             conf = self.mixer.read_doc_conf(args[2])
