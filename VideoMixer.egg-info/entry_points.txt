@@ -1,0 +1,4 @@
+ 
+        [console_scripts]
+        mixer_conf=mixer.scripts.general_conf:cli
+    

@@ -1,0 +1,14 @@
+README.md
+setup.py
+VideoMixer.egg-info/PKG-INFO
+VideoMixer.egg-info/SOURCES.txt
+VideoMixer.egg-info/dependency_links.txt
+VideoMixer.egg-info/entry_points.txt
+VideoMixer.egg-info/requires.txt
+VideoMixer.egg-info/top_level.txt
+mixer/__init__.py
+mixer/file_manager/__init__.py
+mixer/file_manager/general_conf.py
+mixer/utils/__init__.py
+mixer/utils/intro.py
+mixer/utils/yaml.py
