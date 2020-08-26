@@ -2,6 +2,7 @@
 
 import os
 from pathlib import Path
+
 from mixer.utils import YAML, MFiles
 
 
@@ -51,10 +52,21 @@ class GeneralConf(object):
     @classmethod
     def retrive_file(self):
         """ Retrives a file. """
+        _file = os.path.join(self.base_path, self.file_name)
         if MFiles.exists(self.base_path, self.file_name):
-            return YAML.load()
+            return YAML.load(_file)
         else:
             return False
+
+    @classmethod
+    def show_data_file(self):
+        """ Show data from conf file. """
+        if MFiles.exists(self.base_path, self.file_name):
+           data = self.retrive_file()
+           for k, v in data.items():
+               print(f"{k}\t{v}")
+        else:
+            print("No data.")
 
     @classmethod
     def save_file(self, data):

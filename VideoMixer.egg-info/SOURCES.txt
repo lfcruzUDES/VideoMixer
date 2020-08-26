@@ -8,7 +8,10 @@ VideoMixer.egg-info/requires.txt
 VideoMixer.egg-info/top_level.txt
 mixer/__init__.py
 mixer/file_manager/__init__.py
+mixer/file_manager/files.py
 mixer/file_manager/general_conf.py
 mixer/utils/__init__.py
+mixer/utils/files.py
 mixer/utils/intro.py
+mixer/utils/video_extensions.py
 mixer/utils/yaml.py
