@@ -3,11 +3,13 @@
 import os
 from mixer.utils import v_ext, YAML
 
+
 class VFiles(object):
     editor_file_name = "conf.yml"
 
     @classmethod
-    def get_video_files(self, video_path):
+    def get_video_files(cls, video_path):
+        """ Obtains video files. """
         files = os.listdir(video_path)
         videos = []
         for _file in files:
@@ -20,8 +22,9 @@ class VFiles(object):
         return videos
 
     @classmethod
-    def create_editor_file(self, video_path):
-        _file = os.path.join(video_path, self.editor_file_name)
-        data = self.get_video_files(video_path)
-        YAML.dump(os.path.join(video_path, self.editor_file_name),
+    def create_editor_file(cls, video_path):
+        """ Create file to edit videos. """
+        _file = os.path.join(video_path, cls.editor_file_name)
+        data = cls.get_video_files(video_path)
+        YAML.dump(os.path.join(video_path, cls.editor_file_name),
                   data)

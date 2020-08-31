@@ -15,3 +15,5 @@ mixer/utils/files.py
 mixer/utils/intro.py
 mixer/utils/video_extensions.py
 mixer/utils/yaml.py
+mixer/video/__init__.py
+mixer/video/video.py

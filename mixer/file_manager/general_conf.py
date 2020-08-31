@@ -21,66 +21,71 @@ class GeneralConf(object):
     }
 
     @classmethod
-    def interactive_creator(self, intro, cut, end, logo):
-        self.file_structure["intro"] = (
+    def interactive_creator(cls, intro, cut, end, logo):
+        cls.file_structure["intro"] = (
             intro if intro
             else input("Enter a INTRO stream path: ")
         )
-        self.file_structure["cut"] = (
+        cls.file_structure["cut"] = (
             cut if cut else
             input("Enter a CUT stream path: ")
         )
-        self.file_structure["end"] = (
+        cls.file_structure["end"] = (
             end if end
             else input("Enter a END stream path: ")
         )
-        self.file_structure["logo"] = (
+        cls.file_structure["logo"] = (
             log if logo else
             input("Enter a LOGO stream path: ")
         )
-        self.create_file()
+        cls.create_file()
 
     @classmethod
-    def create_file(self):
+    def create_file(cls):
         """ Creates a file. """
-        if not MFiles.exists(self.base_path, self.file_name):
-            os.makedirs(self.base_path)
-        YAML.dump(os.path.join(self.base_path, self.file_name),
-                  self.file_structure)
+        if not MFiles.exists(cls.base_path, cls.file_name):
+            os.makedirs(cls.base_path)
+        YAML.dump(os.path.join(cls.base_path, cls.file_name),
+                  cls.file_structure)
         return True
 
     @classmethod
-    def retrive_file(self):
+    def retrive_file(cls):
         """ Retrives a file. """
-        _file = os.path.join(self.base_path, self.file_name)
-        if MFiles.exists(self.base_path, self.file_name):
+        _file = os.path.join(cls.base_path, cls.file_name)
+        if MFiles.exists(cls.base_path, cls.file_name):
             return YAML.load(_file)
         else:
             return False
 
     @classmethod
-    def show_data_file(self):
+    def show_data_file(cls):
         """ Show data from conf file. """
-        if MFiles.exists(self.base_path, self.file_name):
-           data = self.retrive_file()
-           for k, v in data.items():
-               print(f"{k}\t{v}")
+        if MFiles.exists(cls.base_path, cls.file_name):
+            data = cls.retrive_file()
+            for k, v in data.items():
+                print(f"{k}\t{v}")
         else:
             print("No data.")
 
     @classmethod
-    def save_file(self, data):
+    def save_file(cls, data):
         """ Updates a file. """
         data_mix = {
-            **self.file_structure,
+            **cls.file_structure,
             **data
         }
-        YAML.dump(os.path.join(self.base_path, self.file_name),
-                  self.file_structure)
+        YAML.dump(os.path.join(cls.base_path, cls.file_name),
+                  data_mix)
         return True
 
     @classmethod
-    def delete_file(self):
+    def update(cls, param):
+        datas = cls.retrive_file()
+        print(datas)
+
+    @classmethod
+    def delete_file(cls):
         """ Deletes a file. """
-        os.remove(os.path.join(self.base_path, self.file_name))
+        os.remove(os.path.join(cls.base_path, cls.file_name))
         return True
