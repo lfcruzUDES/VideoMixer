@@ -1,3 +1,3 @@
-from .video import FFmpeg
+from .video import video_processor
 
 

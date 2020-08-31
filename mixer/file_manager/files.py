@@ -14,7 +14,7 @@ class VFiles(object):
         videos = []
         for _file in files:
             name, ext = os.path.splitext(_file)
-            if ext in v_ext:
+            if ext.lower() in v_ext:
                 videos.append({
                     "video": os.path.join(video_path, _file),
                     "slices": [],
@@ -28,3 +28,11 @@ class VFiles(object):
         data = cls.get_video_files(video_path)
         YAML.dump(os.path.join(video_path, cls.editor_file_name),
                   data)
+
+    @classmethod
+    def get_conf(cls, video_path):
+        if not video_path:
+            video_path = "."
+        return YAML.load(os.path.join(
+            video_path, cls.editor_file_name
+            ))
