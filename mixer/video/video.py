@@ -1,41 +1,21 @@
-import ffmpeg
 import os
-from mixer.file_manager import VFiles, GeneralConf
+import subprocess
+
+from mixer.file_manager import GeneralConf, VFiles
 
 
 def video_processor(conf_file):
     """ Process videos. """
     general_conf = GeneralConf.retrive_file()
-    logo = ffmpeg.input(general_conf["logo"])
     datas = VFiles.get_conf(conf_file)
     streams = []
 
     for data in datas:
         if data["video"].startswith("_"):
             general_key = data["video"][1:]
-            video_path = general_conf[general_key]
-            stream = ffmpeg.input(video_path)
-            streams += [stream.video, stream.audio]
+            print(general_key)
         else:
-            stream = ffmpeg.input(data["video"])
-            video = stream.video
-            audio = stream.audio
-            
-            if len(data["slices"]) > 0:
-                for seconds in data["slices"]:
-                    video_trimed = video.filter(
-                            'trim',
-                            start=seconds["start"],
-                            end=seconds["end"]
-                            ).overlay(logo)
-                    audio_trimed = audio.filter(
-                            'atrim',
-                            start=seconds["start"],
-                            end=seconds["end"]
-                            )
-                    streams += [video_trimed, audio_trimed]
-            else:
-                streams += [video.overlay(logo), audio]
-    joined = ffmpeg.concat(*streams, v=1, a=1).node
-    out = ffmpeg.output(joined[0], joined[1], 'joined.mp4')
-    out.run()
+            command = ["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height", "-of", "csv=s=x:p=0", data['video']]
+            scale = subprocess.run(command, capture_output=subprocess.PIPE)
+            print(scale.stdout.decode('utf-8'))
+
