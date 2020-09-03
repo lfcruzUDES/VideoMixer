@@ -20,9 +20,9 @@ def video_processor(conf_file):
             stream = ffmpeg.input(data["video"])
             video = stream.video
             audio = stream.audio
+            
             if len(data["slices"]) > 0:
                 for seconds in data["slices"]:
-
                     video_trimed = video.filter(
                             'trim',
                             start=seconds["start"],
