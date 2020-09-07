@@ -1,3 +1,1 @@
-from .video import video_processor
-
-
+from .video import Processor

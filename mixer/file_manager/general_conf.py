@@ -3,6 +3,7 @@
 import os
 from pathlib import Path
 
+from mixer import settings
 from mixer.utils import YAML, MFiles
 
 
@@ -10,9 +11,9 @@ class GeneralConf(object):
 
     base_path = os.path.join(
         Path.home(),
-        ".config/videomixer"
+        settings.GENERAL_CONF_DIR
     )
-    file_name = "mixer_conf.yml"
+    file_name = settings.GENERAL_CONF_NAME
     file_structure = {
         "intro": None,
         "cut": None,

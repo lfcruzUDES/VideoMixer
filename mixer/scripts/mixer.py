@@ -1,6 +1,6 @@
 import click
 from mixer.file_manager import VFiles
-from mixer.video import video_processor
+from mixer.video import Processor
 
 
 @click.group()
@@ -20,4 +20,5 @@ def conf(files_path):
 @click.argument("files_path")
 def make(files_path):
     """ Makes the video edition. """
-    video_processor(files_path)
+    video_processor = Processor(files_path)
+    video_processor.make()
